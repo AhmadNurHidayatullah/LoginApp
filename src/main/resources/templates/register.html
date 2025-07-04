@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrasi - TeamWork</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background decorative elements */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            transform: rotate(-45deg);
+            z-index: 1;
+        }
+
+        .register-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Left side - Registration Form */
+        .register-left {
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .register-header {
+            margin-bottom: 40px;
+        }
+
+        .register-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .register-subtitle {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #ffffff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            pointer-events: none;
+        }
+
+        .form-input.with-icon {
+            padding-left: 50px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .register-button:hover {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 8px;
+        }
+
+        .login-link {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            color: #FFA500;
+            text-decoration: underline;
+        }
+
+        /* Right side - Branding */
+        .register-right {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFFF00);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #FFD700;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        .welcome-text {
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .welcome-subtitle {
+            font-size: 1rem;
+            color: rgba(26, 26, 26, 0.8);
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .team-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .features-list {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .register-container {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 20px;
+            }
+
+            .register-left {
+                padding: 40px 30px;
+                order: 2;
+            }
+
+            .register-right {
+                padding: 40px 30px;
+                order: 1;
+            }
+
+            .welcome-text {
+                font-size: 1.1rem;
+            }
+
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .register-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                margin: 10px;
+            }
+
+            .register-left {
+                padding: 30px 20px;
+            }
+
+            .register-right {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <!-- Left Side - Registration Form -->
+        <div class="register-left">
+            <div class="register-header">
+                <h2 class="register-title">Daftar Akun</h2>
+                <p class="register-subtitle">Bergabunglah dengan TeamWork sekarang</p>
+            </div>
+
+            <!-- Error Message -->
+            <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+            <form th:action="@{/register}" th:object="${dataUser}" method="post">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            th:field="*{username}"
+                            class="form-input with-icon" 
+                            placeholder="Masukkan username anda"
+                            required 
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            th:field="*{email}"
+                            class="form-input with-icon" 
+                            placeholder="Masukkan email anda"
+                            required 
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            th:field="*{password}"
+                            class="form-input with-icon" 
+                            placeholder="Masukkan password anda"
+                            required 
+                        />
+                        <button type="button" class="password-toggle" onclick="togglePassword()">👁</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="register-button">Daftar Sekarang</button>
+            </form>
+
+            <div class="login-link">
+                Sudah memiliki akun? <a th:href="@{/login}">Masuk disini</a>
+            </div>
+        </div>
+
+        <!-- Right Side - Branding -->
+        <div class="register-right">
+            <div class="brand-logo">
+                <div class="logo-icon">T</div>
+                <div class="brand-name">TeamWork</div>
+            </div>
+            
+            <div class="welcome-text">Bergabung dengan Tim!</div>
+            <div class="welcome-subtitle">Daftarkan akun Anda dan mulai berkolaborasi dengan tim yang hebat.</div>
+            
+            <div class="team-image">
+                <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg" 
+                     alt="Tim Kolaborasi TeamWork" 
+                     style="width: 100%; height: 100%; border-radius: 13px; object-fit: cover;" />
+            </div>
+
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span>Kolaborasi Tim yang Efektif</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span>Manajemen Proyek Terintegrasi</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span>Komunikasi Real-time</span>
+                </div>
+<!--                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span>Dashboard Analitik</span>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁';
+            }
+        }
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !email || !password) {
+                e.preventDefault();
+                alert('Harap isi semua field yang diperlukan!');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                alert('Format email tidak valid!');
+                return;
+            }
+
+            // Password strength validation
+            if (password.length < 6) {
+                e.preventDefault();
+                alert('Password minimal 6 karakter!');
+                return;
+            }
+        });
+
+        // Real-time email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                this.style.borderColor = '#dc3545';
+            } else {
+                this.style.borderColor = '#e9ecef';
+            }
+        });
+
+        // Real-time password validation
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            
+            if (password.length > 0 && password.length < 6) {
+                this.style.borderColor = '#ffc107';
+            } else if (password.length >= 6) {
+                this.style.borderColor = '#28a745';
+            } else {
+                this.style.borderColor = '#e9ecef';
+            }
+        });
+    </script>
+</body>
+</html>
